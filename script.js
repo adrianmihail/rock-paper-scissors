@@ -27,6 +27,7 @@ function getComputerChoice() {
 
 // 9. Call the computer choice
 getComputerChoice();
+console.log(computer);
 
 // 10. Ask user to choose rock, paper or scissors
 let userInput = prompt("Please choose between 'Rock', 'Paper' or 'Scissors'")
@@ -34,12 +35,55 @@ let userInput = prompt("Please choose between 'Rock', 'Paper' or 'Scissors'")
 //11. Uppercase the first letter of the input
 userInput = userInput.charAt(0).toUpperCase() + userInput.slice(1).toLowerCase();
 
-// 12. If computer chooses rock and user chooses rock, then the result is draw
-if (userInput == computer) {
-    console.log("Draw!");
-};
+// 12. Create switch - case depending on computer input
 
-// ^^ above is finished, to work on what's BELOW
+switch (computer) {
+
+    case rock :
+        switch (userInput) {
+            case rock :
+                console.log("Draw!")
+            break;
+
+            case paper :
+                console.log("Win!")
+            break;
+
+            case scissors :
+                console.log("Lose!")
+            break;}
+    break;
+
+    case paper :
+        switch (userInput) {
+            case paper :
+                console.log("Draw!")
+            break;
+
+            case scissors :
+                console.log("Win!")
+            break;
+
+            case rock :
+                console.log("Lose!")
+            break;}
+    break;
+            
+    case scissors :
+        switch (userInput) {
+            case scissors :
+                console.log("Draw!")
+            break;
+
+            case rock :
+                console.log("Win!")
+            break;
+
+            case paper :
+                console.log("Lose!")
+            break;}
+    break;
+}
 
 // 7. If computer chooses rock and user chooses paper, then the result is user win
 // 8. If computer chooses rock and user chooses scissors, then the result is computer win
