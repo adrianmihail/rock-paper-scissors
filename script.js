@@ -24,77 +24,99 @@ function getComputerChoice() {
     // 8. Asign random tool to computer
     return computer = toolsArr[randomTool];
 }
-
-// 9. Call the computer choice
-getComputerChoice();
-console.log(computer);
-
 // 10. Ask user to choose rock, paper or scissors
-let userInput = prompt("Please choose between 'Rock', 'Paper' or 'Scissors'")
+function getUserChoice() {
+    let userInput = prompt("Please choose between 'Rock', 'Paper' or 'Scissors'")
 
-//11. Uppercase the first letter of the input
-userInput = userInput.charAt(0).toUpperCase() + userInput.slice(1).toLowerCase();
+    //11. Uppercase the first letter of the input
+    userInput = userInput.charAt(0).toUpperCase() + userInput.slice(1).toLowerCase();
 
-// 12. Create switch - case depending on computer input
-
-switch (computer) {
-
-    case rock :
-        switch (userInput) {
-            case rock :
-                console.log("Draw!")
-            break;
-
-            case paper :
-                console.log("Win!")
-            break;
-
-            case scissors :
-                console.log("Lose!")
-            break;}
-    break;
-
-    case paper :
-        switch (userInput) {
-            case paper :
-                console.log("Draw!")
-            break;
-
-            case scissors :
-                console.log("Win!")
-            break;
-
-            case rock :
-                console.log("Lose!")
-            break;}
-    break;
-            
-    case scissors :
-        switch (userInput) {
-            case scissors :
-                console.log("Draw!")
-            break;
-
-            case rock :
-                console.log("Win!")
-            break;
-
-            case paper :
-                console.log("Lose!")
-            break;}
-    break;
+    return userInput;
 }
 
-// 7. If computer chooses rock and user chooses paper, then the result is user win
-// 8. If computer chooses rock and user chooses scissors, then the result is computer win
+// xx. Account for the score
+let computerScore = 0;
+let userScore = 0;
 
-// 9. If computer chooses paper and user chooses paper, then the result is draw
-// 10. If computer chooses paper and user chooses scissors, then the result is user win
-// 11. If computer chooses paper and user chooses rock, then the result is computer win
+function oneRound (playerSelection, computerSelection) {
+    computerSelection = getComputerChoice ();
+    playerSelection = getUserChoice();
+    // 12. Create switch - case depending on computer input
 
-// 12. If computer chooses scissors and user chooses scissors, then the result is draw
-// 13. If computer chooses scissors and user chooses rock, then the result is user win
-// 14. If computer chooses scissors and user chooses paper, then the result is computer win
+    switch (computerSelection) {
+    // 13. If computer inputs rock, and user inputs rock then it's a draw etc.
+        case rock :
+            switch (playerSelection) {
+                case rock :
+                    console.log("You both chose Rock! Play again!")
+                    oneRound();
+                break;
 
-// 15. Output the result
+                case paper :
+                    console.log("Paper beats Rock! User Wins!")
+                    ++userScore
+                break;
 
+                case scissors :
+                    console.log("Rock beats Scissors! Computer Wins!")
+                    ++computerScore
+                break;}
+    // 14. Break so the script will stop at this case
+        break;
+
+        case paper :
+            switch (playerSelection) {
+                case paper :
+                    console.log("You both choose Paper! Play again!")
+                    oneRound();
+                break;
+
+                case scissors :
+                    console.log("Scissors beats paper! User Wins!")
+                    ++userScore
+                break;
+
+                case rock :
+                    console.log("Paper beats rock! Computer Wins!")
+                    ++computerScore
+                break;}
+        break;
+                
+        case scissors :
+            switch (playerSelection) {
+                case scissors :
+                    console.log("You both choose Scissors! Play again!")
+                    oneRound();
+                break;
+
+                case rock :
+                    console.log("Rock beats Scissors! User Wins!")
+                    ++userScore
+                break;
+
+                case paper :
+                    console.log("Scissors beats Paper! Computer Wins!")
+                    ++computerScore
+                break;}
+        break;
+    }
+
+}
+
+// 15. Create function to play 5 rounds
+
+function game() {
+    for (let i = 1; i <= 5; ++i) {
+        oneRound(i);
+        console.log("Your Score: ", userScore);
+        console.log("Computer Score: ", computerScore);
+    }
+
+    if (userScore > computerScore){
+        return console.log("You Won!");
+    } else {
+        return console.log("Computer Won!");
+    }; 
+}
+
+game();
